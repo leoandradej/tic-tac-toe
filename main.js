@@ -1,4 +1,4 @@
-const winningConditions = [
+const WINNING_CONDITIONS = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -123,7 +123,7 @@ const endConditions = (data) => {
   
 const checkWinner = (data, player) => {
     let result = false;
-    winningConditions.forEach((condition) => {
+    WINNING_CONDITIONS.forEach((condition) => {
         if (data.board[condition[0]] === player &&
             data.board[condition[1]] === player &&
             data.board[condition[2]] === player) {
@@ -162,13 +162,10 @@ const hardAiMove = (data) => {
     data.board[move] = data.player2;
     let box = document.getElementById(`${move}`);
     box.classList.add("o");
-  
-    console.log(data);
   };
   
 const minimax = (data, player) => {
-    let availableSpaces = data.board.filter((space) => space !== "x" && space !== "o"
-    );
+    let availableSpaces = data.board.filter(space => space !== "x" && space !== "o");
     if (checkWinner(data, data.player1)) {
         return { score: -100, };
     } else if (checkWinner(data, data.player2)) {
@@ -195,8 +192,8 @@ const minimax = (data, player) => {
 
     let bestMove = 0;
     if (player === data.player2) {
-      let bestScore = -10000;
-      for (let i = 0; i < potentialMoves.length; i++) {
+        let bestScore = -10000;
+        for (let i = 0; i < potentialMoves.length; i++) {
             if (potentialMoves[i].score > bestScore) {
                 bestScore = potentialMoves[i].score;
                 bestMove = i;
